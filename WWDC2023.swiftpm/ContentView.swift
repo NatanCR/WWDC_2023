@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     //    @State private var orientation = UIDeviceOrientation.unknown
     @State private var isAnimate : Bool = false
     let secondaryAccentColor = Color("SecundaryAccentColor")

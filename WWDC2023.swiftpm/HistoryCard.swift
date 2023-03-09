@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HistoryCard: View {
+    
     private let accentColor = Color("AccentColor")
     @State var isAnimate = false
     
