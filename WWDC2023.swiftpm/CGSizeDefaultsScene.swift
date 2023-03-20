@@ -9,4 +9,5 @@ import SpriteKit
 
 extension CGSize {
     static let defaultSceneSize: CGSize = CGSize(width: 360, height: 480)
+    //encontrar o tamanho para tablet deitado
 }
