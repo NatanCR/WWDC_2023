@@ -8,7 +8,6 @@ struct ContentView: View {
         return scene
     }
     var body: some View {
-//        SpriteView(scene: GameController.shared.initialScene)
         SpriteView(scene: scene)
             .statusBarHidden()
             .ignoresSafeArea()
