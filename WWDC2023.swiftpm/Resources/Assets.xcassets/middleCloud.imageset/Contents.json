@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "nuvemInfinitx1.png",
+      "filename" : "nuvem_mediax1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "nuvemInfinitx2.png",
+      "filename" : "nuvem_mediax2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "nuvemInfinitx3.png",
+      "filename" : "nuvem_mediax3.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
