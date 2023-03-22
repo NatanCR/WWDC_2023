@@ -21,15 +21,11 @@ class StartScene: SKScene {
         self.scaleMode = .aspectFill
         backgroundColor = UIColor(named: "background") ?? UIColor(red: 0.50, green: 0.71, blue: 0.89, alpha: 1.00)
         
-        
         bg = backgroundCreate()
-
         proxBg = bg.copy() as! SKSpriteNode
         proxBg.position = CGPoint(x: bg.position.x + bg.size.width, y: bg.position.y)
-
         self.addChild(bg)
         self.addChild(proxBg)
-        
         setUpScene()
     }
     
@@ -89,7 +85,6 @@ class StartScene: SKScene {
     func moveSprite(sprite : SKSpriteNode,
                     nextSprite : SKSpriteNode, speed : Float) -> Void {
         var newPosition = CGPointZero
-
         for spriteToMove in [sprite, nextSprite] {
             newPosition = spriteToMove.position
             newPosition.x -= CGFloat(speed * Float(deltaTime))
@@ -98,7 +93,6 @@ class StartScene: SKScene {
             if spriteToMove.frame.maxX < self.frame.minX {
                 spriteToMove.position = CGPoint(x: spriteToMove.position.x + spriteToMove.size.width * 2, y: spriteToMove.position.y)
             }
-            
         }
     }
 
@@ -107,17 +101,8 @@ class StartScene: SKScene {
         if lastFrameTime <= 0 {
             lastFrameTime = currentTime
         }
-        
         deltaTime = currentTime - lastFrameTime
-        
         lastFrameTime = currentTime
-        
         self.moveSprite(sprite: bg, nextSprite: proxBg, speed: 50)
     }
-
-
-    
-    
-    
-    
 }
