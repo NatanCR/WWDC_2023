@@ -8,12 +8,12 @@
 import SpriteKit
 
 class StartScene: SKScene {
-    let widthScreen = UIScreen.main.bounds.size.width
-    let heightScreen = UIScreen.main.bounds.size.height
-    var deltaTime: TimeInterval = 0
-    var lastFrameTime: TimeInterval = 0
-    var bg = SKSpriteNode()
-    var proxBg = SKSpriteNode()
+    private let screenWidth = UIScreen.main.bounds.width
+    private let screenHeight = UIScreen.main.bounds.height
+    private var deltaTime: TimeInterval = 0
+    private var lastFrameTime: TimeInterval = 0
+    private var bg = SKSpriteNode()
+    private var proxBg = SKSpriteNode()
     
     override func sceneDidLoad() {
         super.sceneDidLoad()
@@ -44,7 +44,6 @@ class StartScene: SKScene {
 //    }
     
     func setUpScene() {
-//        self.addChild(backgroundCreate())
         self.addChild(tableCloudCreate())
         self.addChild(startButtonCreate())
     }
@@ -61,7 +60,12 @@ class StartScene: SKScene {
     func tableCloudCreate() -> SKSpriteNode {
         let tcTexture = SKTexture(imageNamed: "tableCloud")
         let tcNode = SKSpriteNode(texture: tcTexture)
-        tcNode.setScale(1) 
+        
+        if screenHeight == CGFloat.ipadPro12LandscapeHeight {
+            tcNode.setScale(0.9)
+        } else {
+            tcNode.setScale(1)
+        }
         tcNode.zPosition = 0
         tcNode.position = CGPoint(x: 0, y: 0)
         return tcNode
@@ -76,9 +80,14 @@ class StartScene: SKScene {
             let gameScene = GameScene(size: .defaultSceneSize)
             self.view?.presentScene(gameScene)
         }
-        button.setScale(1)
+        
+        if screenHeight == CGFloat.ipadPro12LandscapeHeight {
+            button.setScale(0.9)
+        } else {
+            button.setScale(1)
+        }
         button.zPosition = 1
-        button.position = CGPoint(x: widthScreen*0.1, y: heightScreen*0.1)
+        button.position = CGPoint(x: 50, y: 50)
         return button
     }
     

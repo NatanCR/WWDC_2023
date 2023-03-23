@@ -8,8 +8,8 @@
 import SpriteKit
 
 class GameScene: SKScene {
-    let widthScreen = UIScreen.main.bounds.size.width
-    let heightScreen = UIScreen.main.bounds.size.height
+    let screenWidth = UIScreen.main.bounds.width
+    let screenHeight = UIScreen.main.bounds.height
     
     override func didMove(to view: SKView) {
         self.view?.isMultipleTouchEnabled = false
@@ -27,7 +27,6 @@ class GameScene: SKScene {
     
     override func sceneDidLoad() {
         super.sceneDidLoad()
-//        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.scaleMode = .aspectFill
         backgroundColor = UIColor(named: "background") ?? UIColor(red: 0.50, green: 0.71, blue: 0.89, alpha: 1.00)
         self.addChild(tableCreate())
@@ -37,9 +36,18 @@ class GameScene: SKScene {
     func tableCreate() -> SKSpriteNode {
         let tbTexture = SKTexture(imageNamed: "compTableCloud")
         let tbNode = SKSpriteNode(texture: tbTexture)
-        tbNode.setScale(0.9)
         tbNode.zPosition = 0
-        tbNode.position = CGPoint(x: widthScreen*0.3, y: heightScreen*0.3)
+        
+        if screenHeight >= CGFloat.iphone12LandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
+            tbNode.setScale(0.9)
+            tbNode.position = CGPoint(x: self.size.width / 2.5, y: self.size.height / 3)
+        } else if screenHeight <= CGFloat.ipadPro11LandscapeHeight && screenHeight >= CGFloat.ipad10LandscapeHeight {
+            tbNode.setScale(0.9)
+            tbNode.position = CGPoint(x: self.size.width / 2.05, y: self.size.height / 3.5)
+        } else if screenHeight == CGFloat.ipadPro12LandscapeHeight {
+            tbNode.setScale(0.8)
+            tbNode.position = CGPoint(x: self.size.width / 2.1, y: self.size.height / 4)
+        }
         return tbNode
     }
     
@@ -52,9 +60,19 @@ class GameScene: SKScene {
             let startScene = StartScene(size: .defaultSceneSize)
             self.view?.presentScene(startScene)
         }
-        button.setScale(1)
+        
         button.zPosition = 1
-        button.position = CGPoint(x: widthScreen*0.5, y: heightScreen*0.6)
+        
+        if screenHeight >= CGFloat.iphone12LandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
+            button.setScale(1.3)
+            button.position = CGPoint(x: self.size.width / 1.15, y: self.size.height / 4)
+        } else if screenHeight <= CGFloat.ipadPro11LandscapeHeight && screenHeight >= CGFloat.ipad10LandscapeHeight {
+            button.setScale(1)
+            button.position = CGPoint(x: self.size.width / 1.2, y: self.size.height / 9)
+        } else if screenHeight == CGFloat.ipadPro12LandscapeHeight {
+            button.setScale(1)
+            button.position = CGPoint(x: self.size.width / 1.25, y: self.size.height / 11)
+        }
         return button
     }
 }
