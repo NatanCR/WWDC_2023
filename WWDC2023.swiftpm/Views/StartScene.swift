@@ -8,7 +8,6 @@
 import SpriteKit
 
 class StartScene: SKScene {
-    private let screenWidth = UIScreen.main.bounds.width
     private let screenHeight = UIScreen.main.bounds.height
     private var deltaTime: TimeInterval = 0
     private var lastFrameTime: TimeInterval = 0
@@ -31,17 +30,7 @@ class StartScene: SKScene {
     
     override func didMove(to view: SKView) {
         self.view?.isMultipleTouchEnabled = false
-//        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
     }
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        guard let touch = touches.first else { return }
-//        let location = touch.location(in: self)
-//        let box = SKSpriteNode(color: .red, size: CGSize(width: 50, height: 50))
-//        box.position = location
-//        box.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 50, height: 50))
-//        addChild(box)
-//    }
     
     func setUpScene() {
         self.addChild(tableCloudCreate())

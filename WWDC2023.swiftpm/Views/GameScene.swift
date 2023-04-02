@@ -7,8 +7,16 @@
 
 import SpriteKit
 
+struct ButtonTextures {
+    static let btnActiveTextures = ["startButton", "middleButton", "endButton"]
+    static let btnNoActiveTextures = ["startButtonGray", "middleButtonGray", "endButtonGray"]
+}
+
+struct StoryTextures {
+    static let storyTextures = ["startStory", "middleStory", "endStory"]
+}
+
 class GameScene: SKScene {
-    let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     
     override func didMove(to view: SKView) {
@@ -29,8 +37,15 @@ class GameScene: SKScene {
         super.sceneDidLoad()
         self.scaleMode = .aspectFill
         backgroundColor = UIColor(named: "background") ?? UIColor(red: 0.50, green: 0.71, blue: 0.89, alpha: 1.00)
+        setUpScene()
+    }
+    
+    func setUpScene() {
         self.addChild(tableCreate())
         self.addChild(goButton())
+        self.addChild(startButton())
+        self.addChild(middleButton())
+        self.addChild(endButton())
     }
     
     func tableCreate() -> SKSpriteNode {
@@ -73,6 +88,54 @@ class GameScene: SKScene {
             button.setScale(1)
             button.position = CGPoint(x: self.size.width / 1.25, y: self.size.height / 11)
         }
+        return button
+    }
+    
+    func startButton() ->  Button {
+        let btnTexture = SKTexture(imageNamed: ButtonTextures.btnActiveTextures[0])
+        let btnNode = SKSpriteNode(texture: btnTexture)
+        let button = Button(image: btnNode) {
+            
+        } actionEnded: {
+            btnNode.run(SKAction.setTexture(SKTexture(imageNamed: ButtonTextures.btnNoActiveTextures[0])))
+            btnNode.isUserInteractionEnabled = false 
+        }
+        button.name = "button-0"
+        button.setScale(1)
+        button.position = .startButtonIphoneIpad
+        button.zPosition = 1
+        return button 
+    }
+    
+    func middleButton() -> Button {
+        let btnTexture = SKTexture(imageNamed: ButtonTextures.btnActiveTextures[1])
+        let btnNode = SKSpriteNode(texture: btnTexture)
+        let button = Button(image: btnNode) {
+            
+        } actionEnded: {
+            btnNode.run(SKAction.setTexture(SKTexture(imageNamed: ButtonTextures.btnNoActiveTextures[1])))
+            btnNode.isUserInteractionEnabled = false
+        }
+        button.name = "button-1"
+        button.setScale(1)
+        button.position = .middleButtonIphoneIpad
+        button.zPosition = 1
+        return button
+    }
+    
+    func endButton() -> Button {
+        let btnTexture = SKTexture(imageNamed: ButtonTextures.btnActiveTextures[2])
+        let btnNode = SKSpriteNode(texture: btnTexture)
+        let button = Button(image: btnNode) {
+            
+        } actionEnded: {
+            btnNode.run(SKAction.setTexture(SKTexture(imageNamed: ButtonTextures.btnNoActiveTextures[2])))
+            btnNode.isUserInteractionEnabled = false
+        }
+        button.name = "button-2"
+        button.setScale(1)
+        button.position = .endButtonIphoneIpad
+        button.zPosition = 1
         return button
     }
 }
