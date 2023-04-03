@@ -60,11 +60,9 @@ class StartScene: SKScene {
         return tcNode
     }
     
-    func startButtonCreate() -> Button {
-        let btnTexture = SKTexture(imageNamed: "cloudButton")
-        let btnNode = SKSpriteNode(texture: btnTexture)
-        let button = Button(image: btnNode) {
-        } actionEnded: {
+    func startButtonCreate() -> GameButton {
+        let button = GameButton(texture: "cloudButton", pointPosition: CGPoint(x: 50, y: 50))
+        button.setAction(action: .endMoved) { touches in
             let transition = SKTransition.fade(withDuration: 1)
             let gameScene = GameScene(size: .defaultSceneSize)
             self.view?.presentScene(gameScene)
@@ -75,8 +73,6 @@ class StartScene: SKScene {
         } else {
             button.setScale(1)
         }
-        button.zPosition = 1
-        button.position = CGPoint(x: 50, y: 50)
         return button
     }
     

@@ -11,4 +11,6 @@ extension CGPoint {
     static let startButtonIphoneIpad = CGPoint(x: 1500, y: 800)
     static let middleButtonIphoneIpad = CGPoint(x: 1500, y: 650)
     static let endButtonIphoneIpad = CGPoint(x: 1500, y: 500)
+    
+    static let storysIphonePosition = CGPoint(x: 500, y: 700)
 }
