@@ -65,7 +65,7 @@ class StartScene: SKScene {
         button.setAction(action: .endMoved) { touches in
             let transition = SKTransition.fade(withDuration: 1)
             let gameScene = GameScene(size: .defaultSceneSize)
-            self.view?.presentScene(gameScene)
+            self.view?.presentScene(gameScene, transition: transition)
         }
         
         if screenHeight == CGFloat.ipadPro12LandscapeHeight {

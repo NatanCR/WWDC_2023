@@ -17,7 +17,11 @@ struct StoryTextures {
 }
 
 class GameScene: SKScene {
-    let screenHeight = UIScreen.main.bounds.height
+    private let screenHeight = UIScreen.main.bounds.height
+    private var userSafeSequenceArray = [String?: String?]()
+    private var shuffleTextures = StoryTextures.storyTextures.shuffled()
+    private var buttonSequence = [String]()
+    private var storyNode = SKSpriteNode()
     
     override func didMove(to view: SKView) {
         self.view?.isMultipleTouchEnabled = false
@@ -38,6 +42,13 @@ class GameScene: SKScene {
         self.scaleMode = .aspectFill
         backgroundColor = UIColor(named: "background") ?? UIColor(red: 0.50, green: 0.71, blue: 0.89, alpha: 1.00)
         setUpScene()
+        storyNode = createStoryNode()
+        self.addChild(storyNode)
+        print(shuffleTextures)
+    }
+    
+    func groupArrays() {
+        
     }
     
     func setUpScene() {
@@ -46,6 +57,17 @@ class GameScene: SKScene {
         self.addChild(startButton())
         self.addChild(middleButton())
         self.addChild(endButton())
+    }
+    
+    func createStoryNode() -> SKSpriteNode {
+        let texture = SKTexture(imageNamed: shuffleTextures.first ?? "")
+        let node = SKSpriteNode(texture: texture)
+        node.name = "\(shuffleTextures.first!)"
+        node.size = texture.size()
+        node.position = .storysIphonePosition
+        node.zPosition = 1
+        node.setScale(1)
+        return node
     }
     
     func tableCreate() -> SKSpriteNode {
@@ -71,7 +93,7 @@ class GameScene: SKScene {
         button.setAction(action: .endMoved) { touches in
             let transition = SKTransition.crossFade(withDuration: 0.8)
             let startScene = StartScene(size: .defaultSceneSize)
-            self.view?.presentScene(startScene)
+            self.view?.presentScene(startScene, transition: transition)
         }
                 
         if screenHeight >= CGFloat.iphone12LandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
@@ -89,36 +111,79 @@ class GameScene: SKScene {
     
     func startButton() -> GameButton {
         let button = GameButton(texture: ButtonTextures.btnActiveTextures[0], pointPosition: .startButtonIphoneIpad)
-        button.setAction(action: .endMoved) { touches in
-            button.run(SKAction.setTexture(SKTexture(imageNamed: ButtonTextures.btnNoActiveTextures[0])))
-            button.isUserInteractionEnabled = false
-        }
         button.setScale(1)
         button.name = "button-0"
+        button.setAction(action: .endMoved) { [self] touches in
+            button.run(SKAction.setTexture(SKTexture(imageNamed: ButtonTextures.btnNoActiveTextures[0])))
+            button.isUserInteractionEnabled = false
+            buttonSequence.append(button.name!)
+            print(buttonSequence)
+            if storyNode.name == shuffleTextures.first {
+                storyNode.texture = SKTexture(imageNamed: shuffleTextures[1])
+                storyNode.name = shuffleTextures[1]
+                
+            } else if storyNode.name == shuffleTextures[1] {
+                storyNode.texture = SKTexture(imageNamed: shuffleTextures[2])
+                storyNode.name = shuffleTextures[2]
+                
+            } else if storyNode.name == shuffleTextures[2] {
+                let transition = SKTransition.crossFade(withDuration: 0.8)
+                let startScene = StartScene(size: .defaultSceneSize)
+                self.view?.presentScene(startScene, transition: transition)
+            }
+        }
         return button
     }
     
     func middleButton() -> GameButton {
         let button = GameButton(texture: ButtonTextures.btnActiveTextures[1], pointPosition: .middleButtonIphoneIpad)
-        button.setAction(action: .endMoved) { touches in
-            button.run(SKAction.setTexture(SKTexture(imageNamed: ButtonTextures.btnNoActiveTextures[1])))
-            button.isUserInteractionEnabled = false
-        }
         button.setScale(1)
         button.name = "button-1"
+        button.setAction(action: .endMoved) { [self] touches in
+            button.run(SKAction.setTexture(SKTexture(imageNamed: ButtonTextures.btnNoActiveTextures[1])))
+            button.isUserInteractionEnabled = false
+            buttonSequence.append(button.name!)
+            print(buttonSequence)
+            if storyNode.name == shuffleTextures.first {
+                storyNode.texture = SKTexture(imageNamed: shuffleTextures[1])
+                storyNode.name = shuffleTextures[1]
+                
+            } else if storyNode.name == shuffleTextures[1] {
+                storyNode.texture = SKTexture(imageNamed: shuffleTextures[2])
+                storyNode.name = shuffleTextures[2]
+                
+            } else if storyNode.name == shuffleTextures[2] {
+                let transition = SKTransition.crossFade(withDuration: 0.8)
+                let startScene = StartScene(size: .defaultSceneSize)
+                self.view?.presentScene(startScene, transition: transition)
+            }
+        }
         return button
     }
     
     func endButton() -> GameButton {
         let button = GameButton(texture: ButtonTextures.btnActiveTextures[2], pointPosition: .endButtonIphoneIpad)
-        button.setAction(action: .endMoved) { touches in
-            button.run(SKAction.setTexture(SKTexture(imageNamed: ButtonTextures.btnNoActiveTextures[2])))
-            button.isUserInteractionEnabled = false
-        }
         button.setScale(1)
         button.name = "button-2"
+        button.setAction(action: .endMoved) { [self] touches in
+            button.run(SKAction.setTexture(SKTexture(imageNamed: ButtonTextures.btnNoActiveTextures[2])))
+            button.isUserInteractionEnabled = false
+            buttonSequence.append(button.name!)
+            print(buttonSequence)
+            if storyNode.name == shuffleTextures.first {
+                storyNode.texture = SKTexture(imageNamed: shuffleTextures[1])
+                storyNode.name = shuffleTextures[1]
+                
+            } else if storyNode.name == shuffleTextures[1] {
+                storyNode.texture = SKTexture(imageNamed: shuffleTextures[2])
+                storyNode.name = shuffleTextures[2]
+                
+            } else if storyNode.name == shuffleTextures[2] {
+                let transition = SKTransition.crossFade(withDuration: 0.8)
+                let startScene = StartScene(size: .defaultSceneSize)
+                self.view?.presentScene(startScene, transition: transition)
+            }
+        }
         return button
     }
-    
-   
 }
