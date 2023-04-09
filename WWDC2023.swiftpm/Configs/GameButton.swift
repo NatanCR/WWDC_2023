@@ -11,6 +11,7 @@ class GameButton: SKSpriteNode {
     private var actionBegan: ((_ touches: Set<UITouch>)-> Void)?
     private var actionEnded: ((_ touches: Set<UITouch>)-> Void)?
     private var pointPosition: CGPoint
+    
     enum ActionType{
         case endMoved,touch
     }
