@@ -8,7 +8,8 @@
 import SpriteKit
 
 struct ResultPosition {
-    static let positions = [CGPoint(x: -300, y: 300),CGPoint(x: 300, y: 0),CGPoint(x: -300, y: -300)]
+    static let iphonePositions = [CGPoint(x: -450, y: 280),CGPoint(x: -450, y: 0),CGPoint(x: -450, y: -280)]
+    static let ipadPositions = [CGPoint(x: -400, y: 280),CGPoint(x: -400, y: 0),CGPoint(x: -400, y: -280)]
 }
 
 class ResultScene: SKScene {
@@ -55,10 +56,21 @@ class ResultScene: SKScene {
         print("PRINT DA ARRAY DE TEXTURAS TELA DE RESULTADO \(storyTextureArray)")
     }
     
+    private func definedDevicePosition() -> [CGPoint] {
+            var positionArray = [CGPoint]()
+            if screenHeight >= CGFloat.iphoneSELandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
+                positionArray = ResultPosition.iphonePositions
+            } else if screenHeight >= CGFloat.ipad10LandscapeHeight && screenHeight <= CGFloat.ipadPro12LandscapeHeight {
+                positionArray = ResultPosition.ipadPositions
+            }
+            return positionArray
+        }
+    
     func createStoryNodes() {
         createTextureSequence()
         for i in 0..<storyTextureArray.count {
-            let obj = GameButton(texture: storyTextureArray[i], pointPosition: ResultPosition.positions[i])
+            let obj = GameButton(texture: storyTextureArray[i], pointPosition: definedDevicePosition()[i])
+            obj.setScale(0.6)
             storysSprites.append(obj)
             self.addChild(storysSprites[i])
         }

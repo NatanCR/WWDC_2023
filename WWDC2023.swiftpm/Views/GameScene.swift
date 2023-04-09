@@ -26,7 +26,6 @@ class GameScene: SKScene {
     private var shuffleTextures = StoryTextures.storyTextures.shuffled()
     private var buttonSequence = [String]()
     private var storyChoices: [StoryChoice] = []
-//    private var sortedStoryChoices: [StoryChoice] = []
     private var storyNode = SKSpriteNode()
     
     override func didMove(to view: SKView) {
@@ -62,7 +61,11 @@ class GameScene: SKScene {
         let node = SKSpriteNode(texture: texture)
         node.name = "\(shuffleTextures.first!)"
         node.size = texture.size()
-        node.position = .storysIphonePosition
+        if screenHeight >= CGFloat.iphoneSELandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
+            node.position = .storysIphonePosition
+        } else if screenHeight >= CGFloat.ipad10LandscapeHeight && screenHeight <= CGFloat.ipadPro12LandscapeHeight {
+            node.position = .storysIpadPostion
+        }
         node.zPosition = 1
         node.setScale(1)
         return node
