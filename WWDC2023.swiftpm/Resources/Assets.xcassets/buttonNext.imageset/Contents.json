@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "middleStoryx1.png",
+      "filename" : "botao nextx1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "middleStoryx2.png",
+      "filename" : "botao nextx2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "middleStoryx3.png",
+      "filename" : "botao nextx3.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

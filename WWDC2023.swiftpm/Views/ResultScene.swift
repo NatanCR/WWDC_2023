@@ -43,10 +43,54 @@ class ResultScene: SKScene {
         self.addChild(bg)
         self.addChild(proxBg)
         createStoryNodes()
+        self.addChild(createResultMessage())
+        self.addChild(goButton())
     }
     
     override func didMove(to view: SKView) {
         self.view?.isMultipleTouchEnabled = false
+    }
+    
+    func goButton() -> GameButton {
+        let button = GameButton(texture: "buttonNext", pointPosition: CGPoint())
+        button.setAction(action: .endMoved) { touches in
+            let transition = SKTransition.crossFade(withDuration: 0.8)
+            let finalScene = FinalScene(size: .defaultSceneSize)
+            self.view?.presentScene(finalScene, transition: transition)
+        }
+                
+        if screenHeight >= CGFloat.iphone12LandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
+            button.setScale(1.3)
+            button.position = .goButtonIphonePosition
+        } else if screenHeight <= CGFloat.ipadPro11LandscapeHeight && screenHeight >= CGFloat.ipad10LandscapeHeight {
+            button.setScale(1)
+            button.position = .goButtonIpadPosition
+        } else if screenHeight == CGFloat.ipadPro12LandscapeHeight {
+            button.setScale(1)
+            button.position = .goButtonIpadPosition
+        }
+        return button
+    }
+    
+    func createResultMessage() -> SKSpriteNode {
+        let texture = SKTexture(imageNamed: "resultMessage")
+        let node = SKSpriteNode(texture: texture)
+        
+        if screenHeight >= CGFloat.iphone12LandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
+            node.setScale(0.9)
+            node.position = CGPoint(x: 300, y: 0)
+        } else if screenHeight >= CGFloat.ipad10LandscapeHeight && screenHeight <= CGFloat.ipadPro11LandscapeHeight {
+            node.setScale(0.9)
+            node.position = CGPoint(x: 300, y: -100)
+        } else if screenHeight >= CGFloat.ipadPro12LandscapeHeight {
+            node.setScale(0.85)
+            node.position = CGPoint(x: 300, y: -80)
+        }
+        
+        
+        node.zPosition = 0
+        
+        return node
     }
     
     func createTextureSequence() {

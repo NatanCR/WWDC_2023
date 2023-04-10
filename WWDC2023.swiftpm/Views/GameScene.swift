@@ -50,7 +50,6 @@ class GameScene: SKScene {
     
     func setUpScene() {
         self.addChild(tableCreate())
-        self.addChild(goButton())
         self.addChild(startButton())
         self.addChild(middleButton())
         self.addChild(endButton())
@@ -78,7 +77,7 @@ class GameScene: SKScene {
         
         if screenHeight >= CGFloat.iphone12LandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
             tbNode.setScale(0.9)
-            tbNode.position = CGPoint(x: self.size.width / 2.5, y: self.size.height / 3)
+            tbNode.position = CGPoint(x: self.size.width / 2.1, y: self.size.height / 3)
         } else if screenHeight <= CGFloat.ipadPro11LandscapeHeight && screenHeight >= CGFloat.ipad10LandscapeHeight {
             tbNode.setScale(0.9)
             tbNode.position = CGPoint(x: self.size.width / 2.05, y: self.size.height / 3.5)
@@ -89,29 +88,8 @@ class GameScene: SKScene {
         return tbNode
     }
     
-    func goButton() -> GameButton {
-        let button = GameButton(texture: "middleCloud", pointPosition: CGPoint())
-        button.setAction(action: .endMoved) { touches in
-            let transition = SKTransition.crossFade(withDuration: 0.8)
-            let startScene = StartScene(size: .defaultSceneSize)
-            self.view?.presentScene(startScene, transition: transition)
-        }
-                
-        if screenHeight >= CGFloat.iphone12LandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
-            button.setScale(1.3)
-            button.position = CGPoint(x: self.size.width / 1.15, y: self.size.height / 4)
-        } else if screenHeight <= CGFloat.ipadPro11LandscapeHeight && screenHeight >= CGFloat.ipad10LandscapeHeight {
-            button.setScale(1)
-            button.position = CGPoint(x: self.size.width / 1.2, y: self.size.height / 9)
-        } else if screenHeight == CGFloat.ipadPro12LandscapeHeight {
-            button.setScale(1)
-            button.position = CGPoint(x: self.size.width / 1.25, y: self.size.height / 11)
-        }
-        return button
-    }
-    
     func startButton() -> GameButton {
-        let button = GameButton(texture: ButtonTextures.btnActiveTextures[0], pointPosition: .startButtonIphoneIpad)
+        let button = GameButton(texture: ButtonTextures.btnActiveTextures[0], pointPosition: .startButtonIpad)
         button.setScale(1)
         button.name = "button-0"
         button.setAction(action: .endMoved) { [self] touches in
@@ -141,7 +119,7 @@ class GameScene: SKScene {
     }
     
     func middleButton() -> GameButton {
-        let button = GameButton(texture: ButtonTextures.btnActiveTextures[1], pointPosition: .middleButtonIphoneIpad)
+        let button = GameButton(texture: ButtonTextures.btnActiveTextures[1], pointPosition: .middleButtonIpad)
         button.setScale(1)
         button.name = "button-1"
         button.setAction(action: .endMoved) { [self] touches in
@@ -171,7 +149,7 @@ class GameScene: SKScene {
     }
     
     func endButton() -> GameButton {
-        let button = GameButton(texture: ButtonTextures.btnActiveTextures[2], pointPosition: .endButtonIphoneIpad)
+        let button = GameButton(texture: ButtonTextures.btnActiveTextures[2], pointPosition: .endButtonIpad)
         button.setScale(1)
         button.name = "button-2"
         button.setAction(action: .endMoved) { [self] touches in
