@@ -20,6 +20,7 @@ class FinalScene: SKScene {
         self.scaleMode = .aspectFill
         backgroundColor = UIColor(named: "background") ?? UIColor(red: 0.50, green: 0.71, blue: 0.89, alpha: 1.00)
         self.addChild(createFinalMessage())
+        self.addChild(finishButton())
     }
     
     func createFinalMessage() -> SKSpriteNode {
