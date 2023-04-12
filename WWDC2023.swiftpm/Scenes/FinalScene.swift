@@ -8,7 +8,7 @@
 import SpriteKit
 
 class FinalScene: SKScene {
-    private let screenHeight = UIScreen.main.bounds.height
+    private let screenHeight = UIScreen.main.bounds.height //get screen height
     
     override func didMove(to view: SKView) {
         self.view?.isMultipleTouchEnabled = false
@@ -23,9 +23,12 @@ class FinalScene: SKScene {
         self.addChild(finishButton())
     }
     
+    // MARK: - Makes the message node
     func createFinalMessage() -> SKSpriteNode {
         let texture = SKTexture(imageNamed: "originalStory")
         let node = SKSpriteNode(texture: texture)
+        
+        // Identify which device is running to set the scale node
         if screenHeight >= CGFloat.iphoneSELandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
             node.setScale(1)
         } else if screenHeight >= CGFloat.ipad10LandscapeHeight && screenHeight <= CGFloat.ipadPro12LandscapeHeight {
@@ -37,14 +40,18 @@ class FinalScene: SKScene {
         return node 
     }
     
+    // MARK: - Makes a button to go to the start scene
     func finishButton() -> GameButton {
+        // Create a node using the class GameButton
         let button = GameButton(texture: "buttonFinish", pointPosition: CGPoint())
         button.setAction(action: .endMoved) { touches in
+            // call the start scene
             let transition = SKTransition.crossFade(withDuration: 0.8)
             let startScene = StartScene(size: .defaultSceneSize)
             self.view?.presentScene(startScene, transition: transition)
         }
         
+        // Identify which device is running to set the scale node and the position node
         if screenHeight >= CGFloat.iphone12LandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
             button.setScale(1.3)
             button.position = .goButtonIphonePosition

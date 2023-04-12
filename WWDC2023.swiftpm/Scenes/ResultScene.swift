@@ -7,6 +7,7 @@
 
 import SpriteKit
 
+// MARK: - Struct of positions arrays to create storys node
 struct ResultPosition {
     static let iphonePositions = [CGPoint(x: -450, y: 280),CGPoint(x: -450, y: 0),CGPoint(x: -450, y: -280)]
     static let ipadPositions = [CGPoint(x: -400, y: 280),CGPoint(x: -400, y: 0),CGPoint(x: -400, y: -280)]
@@ -18,10 +19,11 @@ class ResultScene: SKScene {
     private var lastFrameTime: TimeInterval = 0
     private var bg = SKSpriteNode()
     private var proxBg = SKSpriteNode()
-    private var sortedStoryChoice: [StoryChoice]
-    private var storyTextureArray: [String] = []
-    private var storysSprites: [GameButton] = []
+    private var sortedStoryChoice: [StoryChoice] // array of the choices struct
+    private var storyTextureArray: [String] = [] // textures array of the choices
+    private var storysSprites: [GameButton] = [] // array of the choices button
     
+    // MARK: - init to get the sorted story choices for show in this scene
     init(sortedStoryChoice: [StoryChoice]) {
         self.sortedStoryChoice = sortedStoryChoice
         super.init(size: .defaultSceneSize)
@@ -51,14 +53,18 @@ class ResultScene: SKScene {
         self.view?.isMultipleTouchEnabled = false
     }
     
+    // MARK: - Makes a button to go to the final scene 
     func goButton() -> GameButton {
+        // Create a node using the class GameButton
         let button = GameButton(texture: "buttonNext", pointPosition: CGPoint())
         button.setAction(action: .endMoved) { touches in
+            // Call the other scene
             let transition = SKTransition.crossFade(withDuration: 0.8)
             let finalScene = FinalScene(size: .defaultSceneSize)
             self.view?.presentScene(finalScene, transition: transition)
         }
-                
+        
+        // Identify which device is running to set the scale node and the position node
         if screenHeight >= CGFloat.iphone12LandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
             button.setScale(1.3)
             button.position = .goButtonIphonePosition
@@ -72,10 +78,12 @@ class ResultScene: SKScene {
         return button
     }
     
+    // MARK: - Makes the result message node
     func createResultMessage() -> SKSpriteNode {
         let texture = SKTexture(imageNamed: "resultMessage")
         let node = SKSpriteNode(texture: texture)
         
+        // Identify which device is running to set the scale node and the position node
         if screenHeight >= CGFloat.iphone12LandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
             node.setScale(0.9)
             node.position = CGPoint(x: 300, y: 0)
@@ -87,19 +95,18 @@ class ResultScene: SKScene {
             node.position = CGPoint(x: 300, y: -80)
         }
         
-        
         node.zPosition = 0
-        
         return node
     }
     
+    // MARK: - Use the sorted story choice array to fill the texture array, for after use that to create textures nodes
     func createTextureSequence() {
         for i in sortedStoryChoice {
             storyTextureArray.append(i.story)
         }
-        print("PRINT DA ARRAY DE TEXTURAS TELA DE RESULTADO \(storyTextureArray)")
     }
     
+    // MARK: - Identify which device is running to set the position node
     private func definedDevicePosition() -> [CGPoint] {
             var positionArray = [CGPoint]()
             if screenHeight >= CGFloat.iphoneSELandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
@@ -110,9 +117,11 @@ class ResultScene: SKScene {
             return positionArray
         }
     
+    // MARK: - Makes the user story nodes sequence and add on the scene
     func createStoryNodes() {
         createTextureSequence()
         for i in 0..<storyTextureArray.count {
+            // I used the Game Button class because is the same struct to create another node
             let obj = GameButton(texture: storyTextureArray[i], pointPosition: definedDevicePosition()[i])
             obj.setScale(0.6)
             storysSprites.append(obj)
@@ -120,6 +129,7 @@ class ResultScene: SKScene {
         }
     }
     
+    // MARK: - Make background cloud to screen
     func backgroundCreate() -> SKSpriteNode {
         let backgroundTexture = SKTexture(imageNamed: "cloudInfinit")
         let backgroundNode = SKSpriteNode(texture: backgroundTexture)
@@ -128,6 +138,7 @@ class ResultScene: SKScene {
         return backgroundNode
     }
     
+    // MARK: - Makes the cloud move
     func moveSprite(sprite : SKSpriteNode,nextSprite : SKSpriteNode, speed : Float) -> Void {
         var newPosition = CGPointZero
         for spriteToMove in [sprite, nextSprite] {
@@ -141,6 +152,7 @@ class ResultScene: SKScene {
         }
     }
 
+    // MARK: - Makes the time are updating
     override func update(_ currentTime: TimeInterval) {
         if lastFrameTime <= 0 {
             lastFrameTime = currentTime
