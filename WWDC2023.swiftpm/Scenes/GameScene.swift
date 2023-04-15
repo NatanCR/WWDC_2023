@@ -48,6 +48,7 @@ class GameScene: SKScene {
     func sortStruct() {
         let sortedStoryChoices = storyChoices.sorted(by: {$0.part < $1.part})
         storyChoices = sortedStoryChoices
+        print(storyChoices)
     }
     
     // MARK: - Set the functions on the scene
@@ -67,7 +68,7 @@ class GameScene: SKScene {
         // Identify which device is running to set the position node
         if screenHeight >= CGFloat.iphoneSELandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
             node.position = .storysIphonePosition
-        } else if screenHeight >= CGFloat.ipad10LandscapeHeight && screenHeight <= CGFloat.ipadPro12LandscapeHeight {
+        } else {
             node.position = .storysIpadPostion
         }
         node.zPosition = 1
@@ -84,12 +85,12 @@ class GameScene: SKScene {
         if screenHeight >= CGFloat.iphone12LandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
             tbNode.setScale(0.9)
             tbNode.position = CGPoint(x: self.size.width / 2.1, y: self.size.height / 3)
-        } else if screenHeight <= CGFloat.ipadPro11LandscapeHeight && screenHeight >= CGFloat.ipad10LandscapeHeight {
-            tbNode.setScale(0.9)
-            tbNode.position = CGPoint(x: self.size.width / 2.05, y: self.size.height / 3.5)
         } else if screenHeight == CGFloat.ipadPro12LandscapeHeight {
             tbNode.setScale(0.8)
             tbNode.position = CGPoint(x: self.size.width / 2.1, y: self.size.height / 4)
+        } else {
+            tbNode.setScale(0.9)
+            tbNode.position = CGPoint(x: self.size.width / 2.05, y: self.size.height / 3.5)
         }
         return tbNode
     }
@@ -121,12 +122,13 @@ class GameScene: SKScene {
                 
             } else if storyNode.name == shuffleTextures[2] {
                 storyChoices.append(StoryChoice(story: shuffleTextures[2], part: button.name ?? "button-0"))
+                // sort the story choices array for show in the result scene
+                sortStruct()
                 // when the last texture is present call the result scene
                 let transition = SKTransition.crossFade(withDuration: 0.8)
                 let resultScene = ResultScene(sortedStoryChoice: storyChoices)
                 self.view?.presentScene(resultScene, transition: transition)
-                // sort the story choices array for show in the result scene
-                sortStruct()
+                
             }
         }
         return button
@@ -154,10 +156,11 @@ class GameScene: SKScene {
                 
             } else if storyNode.name == shuffleTextures[2] {
                 storyChoices.append(StoryChoice(story: shuffleTextures[2], part: button.name ?? "button-1"))
+                sortStruct()
                 let transition = SKTransition.crossFade(withDuration: 0.8)
                 let resultScene = ResultScene(sortedStoryChoice: storyChoices)
                 self.view?.presentScene(resultScene, transition: transition)
-                sortStruct()
+                
             }
         }
         return button
@@ -185,10 +188,11 @@ class GameScene: SKScene {
                 
             } else if storyNode.name == shuffleTextures[2] {
                 storyChoices.append(StoryChoice(story: shuffleTextures[2], part: button.name ?? "button-2"))
+                sortStruct()
                 let transition = SKTransition.crossFade(withDuration: 0.8)
                 let resultScene = ResultScene(sortedStoryChoice: storyChoices)
                 self.view?.presentScene(resultScene, transition: transition)
-                sortStruct()
+                
             }
         }
         return button

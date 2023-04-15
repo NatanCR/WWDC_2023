@@ -20,7 +20,7 @@ let package = Package(
             teamIdentifier: "3SWCGFCJF2",
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .cloud),
+            appIcon: .asset("AppIcon"),
             accentColor: .presetColor(.blue),
             supportedDeviceFamilies: [
                 .pad,
@@ -28,7 +28,7 @@ let package = Package(
             ],
             supportedInterfaceOrientations: [
                 .landscapeRight,
-                .landscapeLeft,
+                .landscapeLeft
             ]
         )
     ],

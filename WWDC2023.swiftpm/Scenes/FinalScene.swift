@@ -30,8 +30,8 @@ class FinalScene: SKScene {
         
         // Identify which device is running to set the scale node
         if screenHeight >= CGFloat.iphoneSELandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
-            node.setScale(1)
-        } else if screenHeight >= CGFloat.ipad10LandscapeHeight && screenHeight <= CGFloat.ipadPro12LandscapeHeight {
+            node.setScale(0.9)
+        } else {
             node.setScale(0.8)
         }
         
@@ -55,10 +55,7 @@ class FinalScene: SKScene {
         if screenHeight >= CGFloat.iphone12LandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
             button.setScale(1.3)
             button.position = .goButtonIphonePosition
-        } else if screenHeight <= CGFloat.ipadPro11LandscapeHeight && screenHeight >= CGFloat.ipad10LandscapeHeight {
-            button.setScale(1)
-            button.position = .goButtonIpadPosition
-        } else if screenHeight == CGFloat.ipadPro12LandscapeHeight {
+        } else {
             button.setScale(1)
             button.position = .goButtonIpadPosition
         }

@@ -68,10 +68,7 @@ class ResultScene: SKScene {
         if screenHeight >= CGFloat.iphone12LandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
             button.setScale(1.3)
             button.position = .goButtonIphonePosition
-        } else if screenHeight <= CGFloat.ipadPro11LandscapeHeight && screenHeight >= CGFloat.ipad10LandscapeHeight {
-            button.setScale(1)
-            button.position = .goButtonIpadPosition
-        } else if screenHeight == CGFloat.ipadPro12LandscapeHeight {
+        } else {
             button.setScale(1)
             button.position = .goButtonIpadPosition
         }
@@ -87,12 +84,12 @@ class ResultScene: SKScene {
         if screenHeight >= CGFloat.iphone12LandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
             node.setScale(0.9)
             node.position = CGPoint(x: 300, y: 0)
-        } else if screenHeight >= CGFloat.ipad10LandscapeHeight && screenHeight <= CGFloat.ipadPro11LandscapeHeight {
-            node.setScale(0.9)
-            node.position = CGPoint(x: 300, y: -100)
         } else if screenHeight >= CGFloat.ipadPro12LandscapeHeight {
             node.setScale(0.85)
             node.position = CGPoint(x: 300, y: -80)
+        } else {
+            node.setScale(0.9)
+            node.position = CGPoint(x: 300, y: -100)
         }
         
         node.zPosition = 0
@@ -111,7 +108,7 @@ class ResultScene: SKScene {
             var positionArray = [CGPoint]()
             if screenHeight >= CGFloat.iphoneSELandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
                 positionArray = ResultPosition.iphonePositions
-            } else if screenHeight >= CGFloat.ipad10LandscapeHeight && screenHeight <= CGFloat.ipadPro12LandscapeHeight {
+            } else {
                 positionArray = ResultPosition.ipadPositions
             }
             return positionArray
