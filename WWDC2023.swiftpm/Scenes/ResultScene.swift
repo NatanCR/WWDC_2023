@@ -88,7 +88,7 @@ class ResultScene: SKScene {
             node.setScale(0.85)
             node.position = CGPoint(x: 300, y: -80)
         } else {
-            node.setScale(0.9)
+            node.setScale(0.8)
             node.position = CGPoint(x: 300, y: -100)
         }
         

@@ -89,7 +89,7 @@ class GameScene: SKScene {
             tbNode.setScale(0.8)
             tbNode.position = CGPoint(x: self.size.width / 2.1, y: self.size.height / 4)
         } else {
-            tbNode.setScale(0.9)
+            tbNode.setScale(0.85)
             tbNode.position = CGPoint(x: self.size.width / 2.05, y: self.size.height / 3.5)
         }
         return tbNode

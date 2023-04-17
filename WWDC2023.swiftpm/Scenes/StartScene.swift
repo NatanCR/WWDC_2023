@@ -47,12 +47,7 @@ class StartScene: SKScene {
         let tcTexture = SKTexture(imageNamed: "tableCloud")
         let tcNode = SKSpriteNode(texture: tcTexture)
         
-        // Identify which device is running to set the scale node
-        if screenHeight == CGFloat.ipadPro12LandscapeHeight {
-            tcNode.setScale(0.9)
-        } else {
-            tcNode.setScale(1)
-        }
+        tcNode.setScale(0.9)
         tcNode.zPosition = 0
         tcNode.position = CGPoint(x: 0, y: 0)
         return tcNode

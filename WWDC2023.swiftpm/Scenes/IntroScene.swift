@@ -42,7 +42,7 @@ class IntroScene: SKScene {
         if screenHeight >= CGFloat.iphoneSELandscapeHeigth && screenHeight <= CGFloat.iphone12MaxLandscapeHeigth {
             tcNode.setScale(0.9)
         } else {
-            tcNode.setScale(0.85)
+            tcNode.setScale(0.8)
         }
         tcNode.zPosition = 0
         tcNode.position = CGPoint(x: 0, y: 0)
