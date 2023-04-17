@@ -23,7 +23,4 @@ extension CGFloat {
     
     static let ipadPro11LandscapeHeight = 834.0
     static let ipadPro11LandscapeWidth = 1194.0
-    
-    static let ipad10LandscapeHeight = 820.0
-    static let ipad10LandscapeWidth = 1180.0 
 }
